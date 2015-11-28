@@ -8,35 +8,40 @@ $(document).ready(function() {
   });
 
   /*
-  $('#root .zoomTarget').each(function() {
-    percentageZoom = 1 / (0.300 ^ $(this).attr('depth'));
-    $(this).children().css('transform', 'scale(' + percentageZoom + ')');
-  });
-  */
+     $('#root .zoomTarget').each(function() {
+     percentageZoom = 1 / (0.300 ^ $(this).attr('depth'));
+     $(this).children().css('transform', 'scale(' + percentageZoom + ')');
+     });
+     */
 
   var currentElement = document;
 
   var zoom = function(element) {
     $(element).zoomTo({animationendcallback: function() {
       $(this).addClass('active');
-      percentageZoom = 100 / (0.300 ^ $(this).attr('depth'));
-      $(this).children().css('zoom', percentageZoom + '%');
     }});
   }
 
+  var zoomIn = function(element) {
+    currentElement = event.toElement;
+    zoom(currentElement);
+  }
+
+  var zoomOut = function() {
+    $(currentElement).removeClass('active');
+    currentElement = $(currentElement).parents('.zoomTarget').first();
+    zoom(currentElement);
+  }
+
   var mousewheel = function(event) {
-    if (event.deltaY < 0) {
+    var scrolled_up = event.deltaY < 0;
+    if(scrolled_up) {
       if($(event.toElement).hasClass('zoomTarget') && !$(event.toElement).hasClass('active')) {
-        currentElement = event.toElement;
+        zoomIn(event.toElement);
       }
     }
-    else {
-      $(currentElement).removeClass('active');
-      currentElement = $(currentElement).parents('.zoomTarget').first();
-    }
-
-    console.log(currentElement);
-    zoom(currentElement);
+    else
+      zoomOut();
 
     event.stopPropagation();
   }

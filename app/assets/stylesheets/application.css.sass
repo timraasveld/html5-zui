@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300,400italic,600,600italic,300italic,700italic,800italic)
 
+*
+  box-sizing: border-box
+
 body
   font-family: 'Open Sans', sans-serif
 
@@ -28,11 +31,11 @@ ul
   > ul
     display: flex
     flex-direction: row
+    flex-wrap: wrap
     > li
-      flex-grow: 1
-      flex-basis: 0
+      width: 33.3333%
+      flex: none
       list-style: none
-      margin: 5px
   > * > .low-detail, .high-detail
     visibility: hidden
   &.active >
