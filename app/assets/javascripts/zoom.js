@@ -1,25 +1,24 @@
 $(document).ready(function() {
   var deepestDepth = 0;
-  $('#root .zoomTarget').each(function() {
-    var depth = $(this).parents('#root .zoomTarget').length;
+  $('.zoomContainer .zoomTarget').each(function() {
+    var depth = $(this).parents('.zoomContainer .zoomTarget').length;
     $(this).attr('depth', depth);
     if(depth > deepestDepth)
       deepestDepth = depth;
   });
 
-  /*
-     $('#root .zoomTarget').each(function() {
-     percentageZoom = 1 / (0.300 ^ $(this).attr('depth'));
-     $(this).children().css('transform', 'scale(' + percentageZoom + ')');
-     });
-     */
+  $('.zoomContainer .zoomTarget').each(function() {
+    var depth = $(this).attr('depth');
+    if(depth >= 1) {
+      percentageZoom = Math.pow(0.5, depth)
+      $(this).css('zoom', percentageZoom);
+    }
+  });
 
   var currentElement = document;
 
   var zoom = function(element) {
-    $(element).zoomTo({animationendcallback: function() {
-      $(this).addClass('active');
-    }});
+    $(element).addClass('active').zoomTo({root: $('.zoomContainer')});
   }
 
   var zoomIn = function(element) {
@@ -34,8 +33,8 @@ $(document).ready(function() {
   }
 
   var mousewheel = function(event) {
-    var scrolled_up = event.deltaY < 0;
-    if(scrolled_up) {
+    var scrolledUp = event.deltaY < 0;
+    if(scrolledUp) {
       if($(event.toElement).hasClass('zoomTarget') && !$(event.toElement).hasClass('active')) {
         zoomIn(event.toElement);
       }
@@ -45,6 +44,10 @@ $(document).ready(function() {
 
     event.stopPropagation();
   }
+
+  $('.zoomTarget').click(function() {
+    zoomIn(this);
+  });
 
   document.onmousewheel = mousewheel;
 });

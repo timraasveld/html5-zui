@@ -1,32 +1,28 @@
-#root{:style => "left: 100px; top: 100px;"}
-  #taarten.zoomTarget
-    .low-detail Taarten
-    %ul.high-detail
-      %li.zoomTarget
-        .low-detail Appeltaart
-        .high-detail
-          %img{:height => "auto", :src => "http://appeltaartrecepten.com/wp-content/uploads/Klassieke-appeltaart.png", :width => "100%"}/
-          %form
-            %input{:name => "topping", :type => "checkbox", :value => "slagroom"}>/
-            Slagroom
-            = succeed "Kersen" do
-              %input{:name => "topping", :type => "checkbox", :value => "kersen"}/
-            %input{:type => "submit", :value => "Bestellen"}/
-      - %w(Appel Bananen Citroen Peren).each do |fruit|
-        %li#l1.zoomTarget
-          .low-detail #{fruit}
+.zoomViewport
+  .zoomContainer
+    #taarten.zoomTarget
+      .low-detail Taarten
+      %ul.high-detail
+        %li.zoomTarget
+          .low-detail Appeltaart
           .high-detail
-            #l2.zoomTarget
-              .low-detail #{fruit}
-              .high-detail
-                #l3.zoomTarget
-                  .low-detail #{fruit}
-                  .high-detail
-                    #l4.zoomTarget
-                      .low-detail #{fruit}
-                      .high-detail
-  #dranken.zoomTarget
-    .low-detail Dranken
-    %ul.high-detail
-      %li Bier
-      %li Wijn
+            %img{:height => "auto", :src => "http://appeltaartrecepten.com/wp-content/uploads/Klassieke-appeltaart.png", :width => "100%"}/
+            %form
+              %input{:name => "topping", :type => "checkbox", :value => "slagroom"}>/
+              Slagroom
+              = succeed "Kersen" do
+                %input{:name => "topping", :type => "checkbox", :value => "kersen"}/
+              %input{:type => "submit", :value => "Bestellen"}/
+        - %w(Appel Bananen Citroen Peren).each do |fruit|
+          %li#l1.zoomTarget
+            .low-detail #{fruit}
+            .high-detail
+              #l2.zoomTarget
+                .low-detail #{fruit}
+                .high-detail
+                  #l3.zoomTarget
+                    .low-detail #{fruit}
+                    .high-detail
+                      #l4.zoomTarget
+                        .low-detail #{fruit}
+                        .high-detail
