@@ -1243,6 +1243,9 @@ if(!$.zoomooz) {
             return;
         }
 
+        var zoom = elem.css('zoom');
+        var correctedScale = scale * (1/zoom);
+
         var xoffset = (dw-elem.outerWidth()*scale)/2.0;
         var yoffset = (dh-elem.outerHeight()*scale)/2.0;
 
@@ -1264,7 +1267,7 @@ if(!$.zoomooz) {
             .translate(xmarginfix,ymarginfix)
             .translate(-xrotorigin,-yrotorigin)
             .translate(xoffset,yoffset)
-            .scale(scale,scale)
+            .scale(correctedScale,correctedScale)
             .multiply(endtrans)
             .translate(xrotorigin,yrotorigin);
 
