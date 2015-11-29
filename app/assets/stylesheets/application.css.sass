@@ -10,10 +10,6 @@ body
   width: 300px
   height: 400px
 
-.zoomViewport
-  width: 500px
-  height: 500px
-  background: #eeeeff
 
 form
   text-align: left
@@ -21,25 +17,30 @@ form
 ul
   padding: 0
 
-.zoomContainer 
-  .zoomTarget
-    border: 1px solid #eee
-    background: rgba(200, 200, 200, 0.2)
-    .low-detail
-      background: rgba(255,255,255,0.9)
-    > ul
-      display: flex
-      flex-direction: row
-      flex-wrap: wrap
-      > li
-        width: 33.3333%
-        flex: none
-        list-style: none
-    > * > .low-detail, .high-detail
-      visibility: hidden
-    &.active >
-      .low-detail, .high-detail, * > .low-detail
-        visibility: visible
+.zoomViewport
+  width: 500px
+  height: 500px
+  background: #eeeeff
+  overflow: hidden
+  .zoomContainer 
+    .zoomTarget
+      border: 1px solid #eee
+      background: rgba(200, 200, 200, 0.2)
+      .low-detail
+        background: rgba(255,255,255,0.9)
+      > ul
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        > li
+          width: 33.3333%
+          flex: none
+          list-style: none
+      > * > .low-detail, .high-detail
+        visibility: hidden
+      &.active >
+        .low-detail, .high-detail, * > .low-detail
+          visibility: visible
 
-.zoomContainer > * > .low-detail
-  visibility: visible !important
+  .zoomContainer > * > .low-detail
+    visibility: visible !important
